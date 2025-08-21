@@ -1,25 +1,16 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-
-const cssMock = {
-  name: 'css-mock',
-  transform(code, id) {
-    if (id.endsWith('.css')) {
-      return {
-        code: '',
-        map: null,
-      };
-    }
-  },
-};
-
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), cssMock],
   test: {
+    watch: false,
     globals: true,
-    environment: 'jsdom',
-    coverage: {
-      reporter: ['text', 'json', 'lcov'],
+    server: {
+      deps: {
+        inline: ['@hexlet/chatbot-v2'],
+      },
     },
+    environment: 'jsdom',
   },
-});
+  plugins: [react()],
+})

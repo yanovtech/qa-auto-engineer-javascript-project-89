@@ -3,8 +3,8 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { test, expect, beforeEach, vi } from 'vitest'
-import { AppPage } from './pages/app-page.js'
-import { WidgetPage } from './pages/widget-page.js'
+import { AppPage } from '../pages/app-page.js'
+import { WidgetPage } from '../pages/widget-page.js'
 
 beforeEach(() => {
   render(<App />)
