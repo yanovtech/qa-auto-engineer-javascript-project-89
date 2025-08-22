@@ -14,7 +14,6 @@ test('Check if form renders correctly', () => {
   const appPage = new AppPage(screen)
   appPage.checkRegisterButton()
 })
-
 test('Check process of filling the form with the data', async () => {
   const user = userEvent.setup()
   const appPage = new AppPage(screen)
@@ -35,7 +34,6 @@ test('Check process of filling the form with the data', async () => {
   await appPage.clickBackButton(user)
   appPage.checkRegisterButton()
 })
-
 test('Check chat functions', async () => {
   const user = userEvent.setup()
   window.HTMLElement.prototype.scrollIntoView = vi.fn()
