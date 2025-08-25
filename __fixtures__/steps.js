@@ -140,4 +140,4 @@ const steps = [
     }
   ]
   
-  export default steps
+export default steps

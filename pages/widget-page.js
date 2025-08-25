@@ -8,12 +8,18 @@ export class WidgetPage {
   }
 
   checkOpenChatButton() {
-    expect(this.screen.getByRole('button', { name: textSet.openChatButton }))
+    expect(
+      this.screen.getByRole('button', { 
+        name: textSet.openChatButton,
+      }),
+    )
   }
 
   async clickOpenChatButton(user) {
     await user.click(
-      this.screen.getByRole('button', { name: textSet.openChatButton }),
+      this.screen.getByRole('button', {
+        name: textSet.openChatButton,
+      }),
     )
   }
 

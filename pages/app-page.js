@@ -6,7 +6,7 @@ export class AppPage {
     this.screen = screen
     this.inputEmail = this.screen.getByPlaceholderText('Email')
     this.inputPassword = this.screen.getByPlaceholderText('Пароль')
-    this.inputAddress = this.screen.getByPlaceholderText('Невский проспект, 12',)
+    this.inputAddress = this.screen.getByPlaceholderText('Невский проспект, 12')
     this.inputCity = this.screen.getByLabelText('Город')
     this.selectCountry = this.screen.getByLabelText('Страна')
     this.checkbox = this.screen.getByRole('checkbox', {
