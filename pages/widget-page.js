@@ -9,7 +9,7 @@ export class WidgetPage {
 
   checkOpenChatButton() {
     expect(
-      this.screen.getByRole('button', { 
+      this.screen.getByRole('button', {
         name: textSet.openChatButton,
       }),
     )
