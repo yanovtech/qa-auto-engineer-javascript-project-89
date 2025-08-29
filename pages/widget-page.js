@@ -82,7 +82,10 @@ export class WidgetPage {
   }
 
   checkTellMoreButton() {
-    expect(this.screen.getByRole('button', { name: textSet.tellMoreButton }))
+      expect(this.screen.getByRole('button', { 
+        name: textSet.tellMoreButton,
+      })
+    )
   }
 
   async clickTellMoreButton(user) {
