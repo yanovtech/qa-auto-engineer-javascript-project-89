@@ -83,7 +83,7 @@ export class WidgetPage {
 
   checkTellMoreButton() {
     expect(
-      this.screen.getByRole('button', { 
+      this.screen.getByRole('button', {
         name: textSet.tellMoreButton,
       }),
     )
