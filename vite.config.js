@@ -13,7 +13,6 @@ export default defineConfig({
       },
     },
     environment: 'jsdom',
-    exclude: './vitest.setup.js',
   },
   plugins: [react()],
 })
