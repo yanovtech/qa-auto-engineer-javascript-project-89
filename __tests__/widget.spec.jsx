@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { test, describe, beforeEach, vi } from 'vitest'
-import { WidgetPage } from '../pages/widget-page.js'
+import { WidgetPage } from './pages/widget-page.js'
 import steps from '../__fixtures__/steps.js'
 import errorSteps from '../__fixtures__/error-steps.js'
 
