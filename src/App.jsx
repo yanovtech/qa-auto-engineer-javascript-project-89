@@ -15,7 +15,7 @@ const App = () => {
   const [submittingState, setSubmittingState] = useState('fillingForm')
 
   const handleChangeField = ({ target }) => {
-    const value = (target.type === 'checkbox') ? (target.checked) : (target.value)
+    const value = target.type === 'checkbox' ? target.checked : target.value
     setForm({ ...form, [target.name]: value })
   }
 
@@ -163,7 +163,7 @@ const App = () => {
 
   return (
     <>
-      {(submittingState === 'fillingForm') ? (renderForm()) : (renderResult())}
+      {(submittingState === 'fillingForm') ? renderForm() : renderResult()}
       {Widget(steps)}
     </>
   )

@@ -24,7 +24,10 @@ Then you can fill the registration form and click at checkbox field, send the fi
 Then you should type ```h``` in the command line to see help information/type ```q``` in the command line to exit the application.
 
 ### Exploring the test directory and the test files 
-Then you can type ```cd \_\_tests\_\_``` in the command line to move to the directory with tests and type ```ls -a``` to see the structure of the directory. To see the test files it is better to use the code redactor program.
+Then you can type ```cd __tests__``` in the command line to move to the directory with tests and type ```ls -a``` to see the structure of the directory. To see the test files it is better to use the code redactor program.
 
 ### Technologies that are used in the project
-For the project application with help information, registration form and chat bot widget is used. This is the application of the educational platform that was not developed in this project. In this project an automatical testing of this application was written in two files: ```app.spec.jsx``` - testing of the application and ```widget.spec.jsx``` - testing of the chat bot widget. Also CI/CD was connected to check the quality and the correct work of the project. In the ```\_\_fixtures\_\_``` directory files with example steps of interaction with chat bot(```steps.js```) and vault with phrases, questions and options of chat bot(```text-set.js```) were written.
+For the project application with help information, registration form and chat bot widget is used. This is the application of the educational platform that was not developed in this project. In this project an automatical testing of this application was written in two files:
+* app.spec.jsx - testing of the application
+* widget.spec.jsx - testing of the chat bot widget
+Also CI/CD was connected to check the quality and the correct work of the project. In the \_\_fixtures\_\_ directory file with example steps of interaction with chat bot(steps.js) and vault with phrases, questions and options of chat bot(text-set.js) were written.
