@@ -1,245 +1,155 @@
 import { expect } from 'vitest'
-import textSet from '../../__fixtures__/text-set.js'
-import '@testing-library/jest-dom'
+import { screen, render, fireEvent } from '@testing-library/react'
+import getWidget from '@hexlet/chatbot-v2'
+import { openWidgetButtonText, startConversationButtonText, changeProfessionButtonText, tryITButtonText, developerButtonText, tellMoreButtonText, simplerButtonText, backButtonText, interestingButtonText, aboutChangeOfProfessionButtonText, previousStageButtonText, tellDetailsButtonText, returnToBeginningButtonText, stayHereButtonText, headToBeginningButtonText, closeButtonLabel } from '../utils/constants'
+import steps from '../../__fixtures__/steps.js'
 
-export class WidgetPage {
-  constructor(screen) {
-    this.screen = screen
+class WidgetPage {
+  static renderWidget(steps) {
+    render(getWidget(steps))
   }
 
-  checkOpenChatButton() {
-    expect(
-      this.screen.getByRole('button', {
-        name: textSet.openChatButton,
-      }),
-    )
+  static get openWidgetButton() {
+    return screen.getByText(openWidgetButtonText)
   }
 
-  async clickOpenChatButton(user) {
-    await user.click(
-      this.screen.getByRole('button', {
-        name: textSet.openChatButton,
-      }),
-    )
+  static clickOpenWidgetButton() {
+    fireEvent.click(this.openWidgetButton)
   }
 
-  checkStartConversationButton() {
-    expect(
-      this.screen.getByRole('button', {
-        name: textSet.startConversationButton,
-      }),
-    )
+  static get startConversationButton() {
+    return screen.getByText(startConversationButtonText)
   }
 
-  async clickStartConversationButton(user) {
-    await user.click(
-      this.screen.getByRole('button', {
-        name: textSet.startConversationButton,
-      }),
-    )
+  static clickStartConversationButton() {
+    fireEvent.click(this.startConversationButton)
   }
 
-  checkChangeProfessionButton() {
-    expect(
-      this.screen.getByRole('button', {
-        name: textSet.changeProfessionButton,
-      }),
-    )
+  static get changeProfessionButton() {
+    return screen.getByText(changeProfessionButtonText)
   }
 
-  async clickChangeProfessionButton(user) {
-    await user.click(
-      this.screen.getByRole('button', {
-        name: textSet.changeProfessionButton,
-      }),
-    )
+  static clickChangeProfessionButton() {
+    fireEvent.click(this.changeProfessionButton)
   }
 
-  checkTryITButton() {
-    expect(this.screen.getByRole('button', { name: textSet.tryITButton }))
+  static get tryITButton() {
+    return screen.getByText(tryITButtonText)
   }
 
-  async clickTryITButton(user) {
-    await user.click(
-      this.screen.getByRole('button', { name: textSet.tryITButton }),
-    )
+  static clickTryITButton() {
+    fireEvent.click(this.tryITButton)
   }
 
-  checkDeveloperButton() {
-    expect(
-      this.screen.getByRole('button', {
-        name: textSet.developerButton,
-      }),
-    )
+  static get developerButton() {
+    return screen.getByText(developerButtonText)
   }
 
-  async clickDeveloperButton(user) {
-    await user.click(
-      this.screen.getByRole('button', {
-        name: textSet.developerButton,
-      }),
-    )
+  static clickDeveloperButton() {
+    fireEvent.click(this.developerButton)
   }
 
-  checkTellMoreButton() {
-    expect(
-      this.screen.getByRole('button', {
-        name: textSet.tellMoreButton,
-      }),
-    )
+  static get tellMoreButton() {
+    return screen.getByText(tellMoreButtonText)
   }
 
-  async clickTellMoreButton(user) {
-    await user.click(
-      this.screen.getByRole('button', { name: textSet.tellMoreButton }),
-    )
+  static clickTellMoreButton() {
+    fireEvent.click(this.tellMoreButton)
   }
 
-  checkSimplerButton() {
-    expect(this.screen.getByRole('button', { name: textSet.simplerButton }))
+  static get simplerButton() {
+    return screen.getByText(simplerButtonText)
   }
 
-  async clickSimplerButton(user) {
-    await user.click(
-      this.screen.getByRole('button', { name: textSet.simplerButton }),
-    )
+  static clickSimplerButton() {
+    fireEvent.click(this.simplerButton)
   }
 
-  checkBackButton() {
-    expect(this.screen.getByRole('button', { name: textSet.backButton }))
+  static get backButton() {
+    return screen.getByText(backButtonText)
   }
 
-  async clickBackButton(user) {
-    await user.click(
-      this.screen.getByRole('button', { name: textSet.backButton }),
-    )
+  static clickBackButton() {
+    fireEvent.click(this.backButton)
   }
 
-  checkInterestingButton() {
-    expect(
-      this.screen.getByRole('button', { name: textSet.interestingButton }),
-    )
+  static get interestingButton() {
+    return screen.getByText(interestingButtonText)
   }
 
-  async clickInterestingButton(user) {
-    await user.click(
-      this.screen.getByRole('button', { name: textSet.interestingButton }),
-    )
+  static clickInterestingButton() {
+    fireEvent.click(this.interestingButton)
   }
 
-  checkChangingProfessionsButton() {
-    expect(
-      this.screen.getByRole('button', {
-        name: textSet.aboutChangingProfessionsButton,
-      }),
-    )
+  static get aboutChangeOfProfessionButton() {
+    return screen.getByText(aboutChangeOfProfessionButtonText)
   }
 
-  async clickChangingProfessionsButton(user) {
-    await user.click(
-      this.screen.getByRole('button', {
-        name: textSet.aboutChangingProfessionsButton,
-      }),
-    )
+  static clickAboutChangeOfProfessionButton() {
+    fireEvent.click(this.aboutChangeOfProfessionButton)
   }
 
-  checkGoBackButton() {
-    expect(this.screen.getByRole('button', { name: textSet.goBackButton }))
+  static get previousStageButton() {
+    return screen.getByText(previousStageButtonText)
   }
 
-  async clickGoBackButton(user) {
-    await user.click(
-      this.screen.getByRole('button', { name: textSet.goBackButton }),
-    )
+  static clickPreviousStageButton() {
+    fireEvent.click(this.previousStageButton)
   }
 
-  checkTakeMeBackButton() {
-    expect(
-      this.screen.getByRole('button', { name: textSet.takeMeBackButton }),
-    )
+  static get tellDetailsButton() {
+    return screen.getByText(tellDetailsButtonText)
   }
 
-  async clickTakeMeBackButton(user) {
-    await user.click(
-      this.screen.getByRole('button', { name: textSet.takeMeBackButton }),
-    )
+  static clickTellDetailsButton() {
+    fireEvent.click(this.tellDetailsButton)
   }
 
-  checkStayHereButton() {
-    expect(
-      this.screen.getByRole('button', {
-        name: textSet.stayHereButton,
-      }),
-    )
+  static get returnToBeginningButton() {
+    return screen.getByText(returnToBeginningButtonText)
   }
 
-  async clickStayHereButton(user) {
-    await user.click(
-      this.screen.getByRole('button', {
-        name: textSet.stayHereButton,
-      }),
-    )
+  static clickReturnToBeginningButton() {
+    fireEvent.click(this.returnToBeginningButton)
   }
 
-  async clickCloseButton(user) {
-    await user.click(this.screen.getByLabelText(textSet.closeButton))
+  static get stayHereButton() {
+    return screen.getByText(stayHereButtonText)
   }
 
-  checkTextOpenChat() {
-    expect(this.screen.getByText(textSet.openChat)).toBeVisible()
+  static clickStayHereButton() {
+    fireEvent.click(this.stayHereButton)
   }
 
-  checkTextStartConversation() {
-    expect(this.screen.getByText(textSet.startConversation)).toBeVisible()
+  static get headToBeginningButton() {
+    return screen.getByText(headToBeginningButtonText)
   }
 
-  checkTextChangeProfession() {
-    expect(this.screen.getByText(textSet.changeProfession)).toBeVisible()
+  static clickHeadToBeginningButton() {
+    fireEvent.click(this.headToBeginningButton)
   }
 
-  checkTextTryIT() {
-    expect(this.screen.getByText(textSet.tryIT)).toBeVisible()
+  static closeWidget() {
+    const closeButton =
+    screen.getByRole('button', {
+      name: closeButtonLabel,
+    })
+    fireEvent.click(closeButton)
   }
 
-  checkTextDeveloperText1() {
-    expect(this.screen.getByText(textSet.developerText1)).toBeVisible()
+  static expectStartConversationButton() {
+    expect(this.startConversationButtton).toBeInTheDocument()
   }
 
-  checkTextDeveloperText2() {
-    expect(this.screen.getByText(textSet.developerText2)).toBeVisible()
+  static expectModalTitle() {
+    expect(screen.getByText(modalTitleText)).toBeInTheDocument()
   }
 
-  checkTextTellMoreText1() {
-    expect(this.screen.getByText(textSet.tellMoreText1)).toBeVisible()
-  }
-
-  checkTextTellMoreText2() {
-    expect(this.screen.getByText(textSet.tellMoreText2)).toBeVisible()
-  }
-
-  checkTextSimpler() {
-    expect(this.screen.getByText(textSet.simpler)).toBeVisible()
-  }
-
-  checkTextStayHereText1() {
-    expect(this.screen.getByText(textSet.stayHereText1)).toBeVisible()
-  }
-
-  checkTextStayHereText2() {
-    expect(this.screen.getByText(textSet.stayHereText2)).toBeVisible()
-  }
-
-  checkTextInterstingText1() {
-    expect(this.screen.getByText(textSet.interstingText1)).toBeVisible()
-  }
-
-  checkTextInterstingText2() {
-    expect(this.screen.getByText(textSet.interstingText2)).toBeVisible()
-  }
-
-  checkChangingProfessionsText() {
-    expect(
-      this.screen.getByText(textSet.aboutChangingProfessions),
-    ).toBeVisible()
+  static waitForModalToClose() {
+    return waitFor(() => {
+      expect(screen.queryByText(modalTitleText)).not.toBeInTheDocument()
+    })
   }
 }
+
+export default WidgetPage

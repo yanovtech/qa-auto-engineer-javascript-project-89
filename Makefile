@@ -8,3 +8,5 @@ test:
 	npx vitest run
 test-coverage:
 	npx vitest run --coverage
+launch:
+	npm run dev
