@@ -1,7 +1,7 @@
 import { expect } from 'vitest'
 import { screen, render, fireEvent, waitFor } from '@testing-library/react'
 import App from '../../src/App'
-import { openWidgetButtonText, registrationButtonText, formLabels, modalTitleText } from '../utils/constants'
+import { openWidgetButtonText, registrationButtonText, formLabels, modalTitleText, closeButtonLabel } from '../utils/constants'
 
 class AppPage {
   static renderApp() {
@@ -82,10 +82,6 @@ class AppPage {
     expect(this.getFormInputLabel('city').value).toBe('Москва')
     expect(this.getFormInputLabel('country').value).toBe('Россия')
     expect(this.getFotmInputLabel('rules').checked).toBe(true)
-  }
-
-  static submitForm() {
-    fireEvent.click(screen.getByText(submitButtonText))
   }
 
   static expectFormSubmission() {

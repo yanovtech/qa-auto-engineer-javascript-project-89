@@ -1,7 +1,5 @@
-import App from '../src/App.jsx'
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-import { test, expect, beforeEach, vi } from 'vitest'
+import { test, beforeEach } from 'vitest'
 import AppPage from './pages/app-page.js'
 import WidgetPage from './pages/widget-page.js'
 
@@ -16,7 +14,7 @@ test('Check if form renders correctly', () => {
 test('Check process of filling of the form with the data', async () => {
   await AppPage.fillOutForm()
   AppPage.expectFormValues()
-  await AppPage.submitForm()
+  await AppPage.clickRegistrationButton()
   AppPage.expectFormSubmission()
   await AppPage.clickBackButton()
   AppPage.checkRegisterButton()

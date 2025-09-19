@@ -1,10 +1,11 @@
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { screen, fireEvent } from '@testing-library/react'
 import { test, describe, beforeEach, vi } from 'vitest'
 import WidgetPage from './pages/widget-page.js'
 import steps from '../__fixtures__/steps.js'
-import errorSteps from '../__fixtures__/erros-steps.js'
+import errorSteps from '../__fixtures__/error-steps.js'
 import textSet from '../__fixtures__/text-set.js'
+import { expect } from 'vitest'
 
 describe('Widget positive', () => {
   beforeEach(() => {
@@ -172,7 +173,7 @@ describe('Widget negative', () => {
     await WidgetPage.clickOpenWidgetButton()
     await WidgetPage.clickStartConversationButton()
     await WidgetPage.clickTryITButton()
-    await user.click(screen.getByRole('button', { name: '' }))
+    await fireEvent.click(screen.getByRole('button', { name: '' }))
     await WidgetPage.clickChangeProfessionButton()
     await WidgetPage.clickCloseButton()
     await WidgetPage.waitForModalToClose()
