@@ -1,63 +1,105 @@
 import { expect } from 'vitest'
-import textSet from '../../__fixtures__/text-set.js'
-import '@testing-library/jest-dom'
+import { screen, render, fireEvent, waitFor } from '@testing-library/react'
+import App from '../../src/App'
+import { openWidgetButtonText, registrationButtonText, formLabels, modalTitleText } from '../utils/constants'
 
-export class AppPage {
-  constructor(screen) {
-    this.screen = screen
-    this.inputEmail = this.screen.getByPlaceholderText('Email')
-    this.inputPassword = this.screen.getByPlaceholderText('Пароль')
-    this.inputAddress = this.screen.getByPlaceholderText('Невский проспект, 12')
-    this.inputCity = this.screen.getByLabelText('Город')
-    this.selectCountry = this.screen.getByLabelText('Страна')
-    this.checkbox = this.screen.getByRole('checkbox', {
-      name: 'Принять правила',
+class AppPage {
+  static renderApp() {
+    render(<App />)
+  }
+
+  static get openWidgetButton() {
+    return screen.getByText(openWidgetButtonText)
+  }
+
+  static clickOpenWidgetButton() {
+    fireEvent.click(this.openWidgetButton)
+  }
+
+  static get registrationButton() {
+    return screen.getByText(registrationButtonText)
+  }
+
+  static clickRegistrationButton() {
+    fireEvent.click(this.registrationButton)
+  }
+
+  static closeWidget() {
+    const closeButton
+    = screen.getByRole('button', {
+      name: closeButtonLabel,
+    })
+    fireEvent.click(closeButton)
+  }
+
+  static waitForModalToClose() {
+    return waitFor(() => {
+      expect(screen.queryByText(modalTitleText)).not.toBeInTheDocument()
     })
   }
 
-  async inputEmailField(user, query) {
-    await user.type(this.inputEmail, query)
+  static expectModalTitle() {
+    expect(screen.getByText(modalTitleText)).toBeInTheDocument()
   }
 
-  async inputPassField(user, query) {
-    await user.type(this.inputPassword, query)
+  static getFormInputLabel(label) {
+    return screen.getByLabelText(formLabels[label])
   }
 
-  async inputAdressField(user, query) {
-    await user.type(this.inputAddress, query)
+  static fillOutForm() {
+    fireEvent.change(this.getFormInputLabel('email'), {
+      target: {
+        value: 'test@example.com',
+      },
+    })
+    fireEvent.change(this.getFormInputLabel('password'), {
+      target: {
+        value: 'testpassword',
+      },
+    })
+    fireEvent.change(this.getFormInputLabel('address'), {
+      target: {
+        value: 'Тестовый адрес, тестовый номер',
+      },
+    })
+    fireEvent.change(this.getFormInputLabel('city'), {
+      target: {
+        value: 'Москва',
+      },
+    })
+    fireEvent.change(this.getFormInputLabel('country'), {
+      target: {
+        value: 'Россия',
+      },
+    })
+    fireEvent.click(this.getFormInputLabel('rules'))
   }
 
-  async inputCityField(user, query) {
-    await user.type(this.inputCity, query)
+  static expectFormValues() {
+    expect(this.getFormInputLabel('email').value).toBe('test@example.com')
+    expect(this.getFormInputLabel('password').value).toBe('testpassword')
+    expect(this.getFormInputLabel('address').value).toBe('Тестовый адрес, тестовый номер')
+    expect(this.getFormInputLabel('city').value).toBe('Москва')
+    expect(this.getFormInputLabel('country').value).toBe('Россия')
+    expect(this.getFotmInputLabel('rules').checked).toBe(true)
   }
 
-  async selectCountryField(user, query) {
-    await user.selectOptions(this.selectCountry, query)
+  static submitForm() {
+    fireEvent.click(screen.getByText(submitButtonText))
   }
 
-  async selectCheckboxField(user) {
-    await user.click(this.checkbox)
-  }
-
-  checkRegisterButton() {
-    expect(
-      this.screen.getByRole('button', { name: textSet.signUpButton }),
-    )
-  }
-
-  async clickRegisterButton(user) {
-    await user.click(
-      this.screen.getByRole('button', { name: textSet.signUpButton }),
-    )
-  }
-
-  checkBackButton() {
-    expect(this.screen.getByRole('button', { name: textSet.moveBackButtonApp }))
-  }
-
-  async clickBackButton(user) {
-    await user.click(
-      this.screen.getByRole('button', { name: textSet.moveBackButtonApp }),
-    )
+  static expectFormSubmission() {
+    return waitFor(async () => {
+      const resultTable = screen.getByRole('table')
+      expect(resultTable).toBeInTheDocument()
+      expect(await screen.findByText('Email').nextSibling).toHaveTextContent('test@example.com')
+      expect(await screen.findByText('Password').nextSibling).toHaveTextContent('testpassword')
+      expect(await screen.findByText('Address').nextSibling).toHaveTextContent('Тестовый адрес, тестовый номер')
+      expect(await screen.findByText('City').nextSibling).toHaveTextContent('Москва')
+      expect(await screen.findByText('Country').nextSibling).toHaveTextContent('Россия')
+      expect(await screen.findByText('Rules').nextSibling).toHaveTextContent('true')
+    })
   }
 }
+
+export default AppPage

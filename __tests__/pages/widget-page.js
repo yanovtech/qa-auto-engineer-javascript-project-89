@@ -1,8 +1,7 @@
 import { expect } from 'vitest'
 import { screen, render, fireEvent } from '@testing-library/react'
 import getWidget from '@hexlet/chatbot-v2'
-import { openWidgetButtonText, startConversationButtonText, changeProfessionButtonText, tryITButtonText, developerButtonText, tellMoreButtonText, simplerButtonText, backButtonText, interestingButtonText, aboutChangeOfProfessionButtonText, previousStageButtonText, tellDetailsButtonText, returnToBeginningButtonText, stayHereButtonText, headToBeginningButtonText, closeButtonLabel } from '../utils/constants'
-import steps from '../../__fixtures__/steps.js'
+import { openWidgetButtonText, startConversationButtonText, changeProfessionButtonText, tryITButtonText, developerButtonText, tellMoreButtonText, simplerButtonText, backButtonText, interestingButtonText, aboutChangeOfProfessionButtonText, previousStageButtonText, tellDetailsButtonText, returnToBeginningButtonText, stayHereButtonText, closeButtonLabel } from '../utils/constants'
 
 class WidgetPage {
   static renderWidget(steps) {
@@ -121,24 +120,76 @@ class WidgetPage {
     fireEvent.click(this.stayHereButton)
   }
 
-  static get headToBeginningButton() {
-    return screen.getByText(headToBeginningButtonText)
-  }
-
-  static clickHeadToBeginningButton() {
-    fireEvent.click(this.headToBeginningButton)
-  }
-
   static closeWidget() {
-    const closeButton =
-    screen.getByRole('button', {
+    const closeButton
+    = screen.getByRole('button', {
       name: closeButtonLabel,
     })
     fireEvent.click(closeButton)
   }
 
+  static expectOpenWidgetButton() {
+    expect(this.openWidgetButton).toBeInTheDocument()
+  }
+
   static expectStartConversationButton() {
     expect(this.startConversationButtton).toBeInTheDocument()
+  }
+
+  static expectChangeProfessionButton() {
+    expect(this.changeProfessionButton).toBeInTheDocument()
+  }
+
+  static expectTryITButton() {
+    expect(this.tryITButton).toBeInTheDocument()
+  }
+
+  static expectDeveloperButton() {
+    expect(this.developerButton).toBeInTheDocument()
+  }
+
+  static expectTellMoreButton() {
+    expect(this.tellMoreButton).toBeInTheDocument()
+  }
+
+  static expectSimplerButton() {
+    expect(this.simplerButton).toBeInTheDocument()
+  }
+
+  static expectBackButton() {
+    expect(this.backButton).toBeInTheDocument()
+  }
+
+  static expectInterestingButton() {
+    expect(this.interestingButton).toBeInTheDocument()
+  }
+
+  static expectAboutChangeOfProfessionButton() {
+    expect(this.aboutChangeOfProfessionButton).toBeInTheDocument()
+  }
+
+  static expectPreviousStageButton() {
+    expect(this.previousStageButton).toBeInTheDocument()
+  }
+
+  static expectTellDetailsButton() {
+    expect(this.tellDetailsButton).toBeInTheDocument()
+  }
+
+  static expectReturnToBeginningButton() {
+    expect(this.returnToBeginningButton).toBeInTheDocument()
+  }
+
+  static expectStayHereButton() {
+    expect(this.stayHereButton).toBeInTheDocument()
+  }
+
+  static expectCloseButton() {
+    expect(
+      screen.getByRole('button', {
+        name: closeButtonLabel,
+      }),
+    ).toBeInTheDocument()
   }
 
   static expectModalTitle() {
@@ -151,5 +202,4 @@ class WidgetPage {
     })
   }
 }
-
 export default WidgetPage

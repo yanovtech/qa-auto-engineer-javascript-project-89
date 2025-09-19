@@ -1,9 +1,10 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { test, describe, beforeEach, vi } from 'vitest'
-import { WidgetPage } from './pages/widget-page.js'
+import WidgetPage from './pages/widget-page.js'
 import steps from '../__fixtures__/steps.js'
+import errorSteps from '../__fixtures__/erros-steps.js'
+import textSet from '../__fixtures__/text-set.js'
 
 describe('Widget positive', () => {
   beforeEach(() => {
@@ -11,167 +12,170 @@ describe('Widget positive', () => {
     window.HTMLElement.prototype.scrollIntoView = vi.fn()
   })
 
-  test('Check correct page displaying', () => {
-    WidgetPage.checkOpenChatButton()
+  test('Check Open Widget button displaying', () => {
+    WidgetPage.expectOpenWidgetButton()
   })
 
-  test('Check open chat button', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    WidgetPage.checkTextOpenChat()
-    WidgetPage.checkStartConversationButton()
+  test('Check Open Widget button and correct displaying of Chat Bot widget', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    WidgetPage.expectModalTitle()
+    expect(textSet.openChatText).toBeInTheDocument()
+    WidgetPage.expectStartConversationButton()
+    WidgetPage.expectCloseButton()
   })
 
-  test('Check starting the conversation', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    WidgetPage.checkTextStartConversation()
-    WidgetPage.checkChangeProfessionButton()
-    WidgetPage.checkTryITButton()
-    WidgetPage.checkDeveloperButton()
+  test('Check Start Conversation button and correct displaying of opened by it menu of the Chat Bot', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    expect(textSet.startConversationText).toBeInTheDocument()
+    WidgetPage.expectChangeProfessionButton()
+    WidgetPage.expectTryITButton()
+    WidgetPage.expectDeveloperButton()
   })
 
-  test('Check сhange profession or find employment section', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    await WidgetPage.clickChangeProfessionButton(user)
-    WidgetPage.checkTextChangeProfession()
-    WidgetPage.checkTellMoreButton()
-    WidgetPage.checkSimplerButton()
-    WidgetPage.checkBackButton()
+  test('Check Change Profession button and same section', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickChangeProfessionButton()
+    expect(textSet.changeProfessionText).toBeInTheDocument()
+    WidgetPage.expectTellMoreButton()
+    WidgetPage.expectSimplerButton()
+    WidgetPage.expectBackButton()
   })
 
-  test('Check try yourself in IT section', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    await WidgetPage.clickTryITButton(user)
-    WidgetPage.checkTextTryIT()
-    WidgetPage.checkInterestingButton()
-    WidgetPage.checkChangingProfessionsButton()
-    WidgetPage.checkGoBackButton()
+  test('Check Try IT button and same section', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickTryITButton()
+    expect(textSet.tryITText).toBeInTheDocument()
+    WidgetPage.expectInterestingButton()
+    WidgetPage.expectAboutChangeOfProfessionButton()
+    WidgetPage.expectPreviousStageButton()
   })
 
-  test('Check I am a developer, I want to deepen my knowledge section', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    await WidgetPage.clickDeveloperButton(user)
-    WidgetPage.checkTextDeveloperText1()
-    WidgetPage.checkTextDeveloperText2()
-    WidgetPage.checkTellMoreButton()
-    WidgetPage.checkTakeMeBackButton()
+  test('Check Developer button and same section', async () => {
+    await WidgetPage.clickOpenChatButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickDeveloperButton()
+    expect(textSet.developerText1).toBeInTheDocument()
+    expect(textSet.developerText2).toBeInTheDocument()
+    WidgetPage.expectTellDetailsButton()
+    WidgetPage.expectReturnToBeginningButton()
   })
 
-  test('Check tell me more section', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    await WidgetPage.clickChangeProfessionButton(user)
-    await WidgetPage.clickTellMoreButton(user)
-    WidgetPage.checkTextTellMoreText1()
-    WidgetPage.checkTextTellMoreText2()
-    WidgetPage.checkStayHereButton()
-    WidgetPage.checkBackButton()
+  test('Check Tell More button in Change Profession section and section of that button)', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickChangeProfessionButton()
+    await WidgetPage.clickTellMoreButton()
+    expect(textSet.tellMoreText1).toBeInTheDocument()
+    expect(textSet.tellMoreText2).toBeInTheDocument()
+    WidgetPage.expectStayHereButton()
+    WidgetPage.expectBackButton()
   })
 
-  test('Check something simpler section', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    await WidgetPage.clickChangeProfessionButton(user)
-    await WidgetPage.clickSimplerButton(user)
-    WidgetPage.checkTextSimpler()
-    WidgetPage.checkInterestingButton()
-    WidgetPage.checkChangingProfessionsButton()
-    WidgetPage.checkGoBackButton()
+  test('Check Simpler button in Change Profession section and section of that button', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickChangeProfessionButton()
+    await WidgetPage.clickSimplerButton()
+    expect(textSet.simplerText).toBeInTheDocument()
+    WidgetPage.expectInterestingButton()
+    WidgetPage.expectAboutChangeOfProfessionButton()
+    WidgetPage.expectPreviousStageButton()
   })
 
-  test('Check return to top function', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    await WidgetPage.clickChangeProfessionButton(user)
-    await WidgetPage.clickBackButton(user)
-    WidgetPage.checkChangeProfessionButton()
-    WidgetPage.checkTryITButton()
-    WidgetPage.checkDeveloperButton()
+  test('Check Back button and correct display of the chat menu in that user is moved', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickChangeProfessionButton()
+    await WidgetPage.clickBackButton()
+    WidgetPage.expectChangeProfessionButton()
+    WidgetPage.expectTryITButton()
+    WidgetPage.expectDeveloperButton()
   })
 
-  test('Check stay here and sign up for the course section', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    await WidgetPage.clickChangeProfessionButton(user)
-    await WidgetPage.clickTellMoreButton(user)
-    await WidgetPage.clickStayHereButton(user)
-    WidgetPage.checkTextStayHereText1()
-    WidgetPage.checkTextStayHereText2()
-    WidgetPage.checkStayHereButton()
-    WidgetPage.checkTakeMeBackButton()
+  test('Check Stay Here button and same section', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickChangeProfessionButton()
+    await WidgetPage.clickTellMoreButton()
+    await WidgetPage.clickStayHereButton()
+    expect(textSet.stayHereText1).toBeInTheDocument()
+    expect(textSet.stayHereText2).toBeInTheDocument()
+    WidgetPage.expectStayHereButton()
+    WidgetPage.expectReturnToBeginningButton()
   })
 
-  test('Check interesting section', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    await WidgetPage.clickTryITButton(user)
-    await WidgetPage.clickInterestingButton(user)
-    WidgetPage.checkTextInterstingText1()
-    WidgetPage.checkTextInterstingText2()
-    WidgetPage.checkStayHereButton()
-    WidgetPage.checkBackButton()
+  test('Check Interesting button and same section', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickTryITButton()
+    await WidgetPage.clickInterestingButton()
+    expect(textSet.interestingText1).toBeInTheDocument()
+    expect(textSet.interestingText2).toBeInTheDocument()
+    WidgetPage.expectStayHereButton()
+    WidgetPage.expectBackButton()
   })
 
-  test('Check what about changing professions section', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    await WidgetPage.clickTryITButton(user)
-    await WidgetPage.clickChangingProfessionsButton(user)
-    WidgetPage.checkChangingProfessionsText()
-    WidgetPage.checkTellMoreButton()
-    WidgetPage.checkSimplerButton()
-    WidgetPage.checkBackButton()
+  test('Check About Change Of Profession button and same section', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickTryITButton()
+    await WidgetPage.clickAboutChangeOfProfessionButton()
+    expect(textSet.aboutChangeOfProfessionText).toBeInTheDocument()
+    WidgetPage.expectTellMoreButton()
+    WidgetPage.expectSimplerButton()
+    WidgetPage.expectBackButton()
   })
 
-  test('Сheck go back button', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    await WidgetPage.clickTryITButton(user)
-    await WidgetPage.clickGoBackButton(user)
-    WidgetPage.checkChangeProfessionButton()
-    WidgetPage.checkTryITButton()
-    WidgetPage.checkDeveloperButton()
+  test('Check Previous Stage Button and section user is moved after click on declared button', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickTryITButton()
+    await WidgetPage.clickPreviousStageButton()
+    WidgetPage.expectChangeProfessionButton()
+    WidgetPage.expectTryITButton()
+    WidgetPage.expectDeveloperButton()
   })
 
-  test('Сheck tell me more button in I am a developer, I want to deepen my knowledge section', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    await WidgetPage.clickDeveloperButton(user)
-    await WidgetPage.clickTellMoreButton(user)
-    WidgetPage.checkStartConversationButton()
+  test('Check button with Tell More Title and result in Developer section', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickDeveloperButton()
+    await WidgetPage.clickTellDetailsButton()
+    WidgetPage.expectStartConversationButton()
   })
 
-  test('Сheck go back button in I am a developer, I want to deepen my knowledge section', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickStartConversationButton(user)
-    await WidgetPage.clickDeveloperButton(user)
-    await WidgetPage.clickTakeMeBackButton(user)
-    WidgetPage.checkChangeProfessionButton()
-    WidgetPage.checkTryITButton()
-    WidgetPage.checkDeveloperButton()
+  test('Check Return To Beginning button and result in Developer section', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickDeveloperButton()
+    await WidgetPage.clickReturnToBeginningButton()
+    WidgetPage.expectChangeProfessionButton()
+    WidgetPage.expectTryITButton()
+    WidgetPage.expectDeveloperButton()
   })
 
-  test('Check close button', async () => {
-    const user = userEvent.setup()
-    await WidgetPage.clickOpenChatButton(user)
-    await WidgetPage.clickCloseButton(user)
-    WidgetPage.checkOpenChatButton()
+  test('Check close button of the widget', async () => {
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickCloseButton()
+    await WidgetPage.waitForModalToClose()
+    WidgetPage.expectOpenWidgetButton()
+  })
+})
+
+describe('Widget negative', () => {
+  test('Check wrong interaction with the interface', async () => {
+    WidgetPage.render(errorSteps)
+    window.HTMLElement.prototype.scrollIntoView = vi.fn()
+    await WidgetPage.clickOpenWidgetButton()
+    await WidgetPage.clickStartConversationButton()
+    await WidgetPage.clickTryITButton()
+    await user.click(screen.getByRole('button', { name: '' }))
+    await WidgetPage.clickChangeProfessionButton()
+    await WidgetPage.clickCloseButton()
+    await WidgetPage.waitForModalToClose()
+    WidgetPage.checkOpenWidgetButton()
   })
 })
