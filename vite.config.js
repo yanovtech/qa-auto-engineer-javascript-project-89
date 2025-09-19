@@ -14,9 +14,10 @@ export default defineConfig({
     },
     environment: 'jsdom',
     coverage: {
-      provider:'v8',
-      reporter:['text','lcov','html'],
-      reportsDirectory:'./coverage',
+      provider: 'v8',
+      reporter: ['text', 'lcov', 'html'],
+      reportsDirectory: './coverage',
+      exclusions: ['./vitest.setup.js', './src/main.jsx'],
     },
   },
   plugins: [react()],
