@@ -9,7 +9,7 @@ import { expect } from 'vitest'
 
 describe('Widget positive', () => {
   beforeEach(() => {
-    WidgetPage.render(steps)
+    WidgetPage.renderWidget(steps)
     window.HTMLElement.prototype.scrollIntoView = vi.fn()
   })
 
@@ -168,7 +168,7 @@ describe('Widget positive', () => {
 
 describe('Widget negative', () => {
   test('Check wrong interaction with the interface', async () => {
-    WidgetPage.render(errorSteps)
+    WidgetPage.renderWidget(errorSteps)
     window.HTMLElement.prototype.scrollIntoView = vi.fn()
     await WidgetPage.clickOpenWidgetButton()
     await WidgetPage.clickStartConversationButton()
