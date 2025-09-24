@@ -1,11 +1,10 @@
 import '@testing-library/jest-dom'
 import { screen, fireEvent } from '@testing-library/react'
-import { test, describe, beforeEach, vi } from 'vitest'
-import WidgetPage from './pages/widget-page.js'
+import { test, describe, beforeEach, vi, expect } from 'vitest'
+import WidgetPage from './pages/widget-page.jsx'
 import steps from '../__fixtures__/steps.js'
 import errorSteps from '../__fixtures__/error-steps.js'
-import textSet from '../__fixtures__/text-set.js'
-import { expect } from 'vitest'
+import textSet from '../__fixtures__/text-set.jsx'
 
 describe('Widget positive', () => {
   beforeEach(() => {
@@ -20,7 +19,7 @@ describe('Widget positive', () => {
   test('Check Open Widget button and correct displaying of Chat Bot widget', async () => {
     await WidgetPage.clickOpenWidgetButton()
     WidgetPage.expectModalTitle()
-    expect(textSet.openChatText).toBeInTheDocument()
+    expect(screen.getByText(textSet.openChatText)).toBeInTheDocument()
     WidgetPage.expectStartConversationButton()
     WidgetPage.expectCloseButton()
   })
@@ -28,7 +27,7 @@ describe('Widget positive', () => {
   test('Check Start Conversation button and correct displaying of opened by it menu of the Chat Bot', async () => {
     await WidgetPage.clickOpenWidgetButton()
     await WidgetPage.clickStartConversationButton()
-    expect(textSet.startConversationText).toBeInTheDocument()
+    expect(screen.getByText(textSet.startConversationText)).toBeInTheDocument()
     WidgetPage.expectChangeProfessionButton()
     WidgetPage.expectTryITButton()
     WidgetPage.expectDeveloperButton()
@@ -38,7 +37,7 @@ describe('Widget positive', () => {
     await WidgetPage.clickOpenWidgetButton()
     await WidgetPage.clickStartConversationButton()
     await WidgetPage.clickChangeProfessionButton()
-    expect(textSet.changeProfessionText).toBeInTheDocument()
+    expect(screen.getByText(textSet.changeProfessionText)).toBeInTheDocument()
     WidgetPage.expectTellMoreButton()
     WidgetPage.expectSimplerButton()
     WidgetPage.expectBackButton()
@@ -48,18 +47,18 @@ describe('Widget positive', () => {
     await WidgetPage.clickOpenWidgetButton()
     await WidgetPage.clickStartConversationButton()
     await WidgetPage.clickTryITButton()
-    expect(textSet.tryITText).toBeInTheDocument()
+    expect(screen.getByText(textSet.tryITText)).toBeInTheDocument()
     WidgetPage.expectInterestingButton()
     WidgetPage.expectAboutChangeOfProfessionButton()
     WidgetPage.expectPreviousStageButton()
   })
 
   test('Check Developer button and same section', async () => {
-    await WidgetPage.clickOpenChatButton()
+    await WidgetPage.clickOpenWidgetButton()
     await WidgetPage.clickStartConversationButton()
     await WidgetPage.clickDeveloperButton()
-    expect(textSet.developerText1).toBeInTheDocument()
-    expect(textSet.developerText2).toBeInTheDocument()
+    expect(screen.getByText(textSet.developerText1)).toBeInTheDocument()
+    expect(screen.getByText(textSet.developerText2)).toBeInTheDocument()
     WidgetPage.expectTellDetailsButton()
     WidgetPage.expectReturnToBeginningButton()
   })
@@ -69,8 +68,8 @@ describe('Widget positive', () => {
     await WidgetPage.clickStartConversationButton()
     await WidgetPage.clickChangeProfessionButton()
     await WidgetPage.clickTellMoreButton()
-    expect(textSet.tellMoreText1).toBeInTheDocument()
-    expect(textSet.tellMoreText2).toBeInTheDocument()
+    expect(screen.getByText(textSet.tellMoreText1)).toBeInTheDocument()
+    expect(screen.getByText(textSet.tellMoreText2)).toBeInTheDocument()
     WidgetPage.expectStayHereButton()
     WidgetPage.expectBackButton()
   })
@@ -80,7 +79,7 @@ describe('Widget positive', () => {
     await WidgetPage.clickStartConversationButton()
     await WidgetPage.clickChangeProfessionButton()
     await WidgetPage.clickSimplerButton()
-    expect(textSet.simplerText).toBeInTheDocument()
+    expect(screen.getByText(textSet.simplerText)).toBeInTheDocument()
     WidgetPage.expectInterestingButton()
     WidgetPage.expectAboutChangeOfProfessionButton()
     WidgetPage.expectPreviousStageButton()
@@ -102,8 +101,8 @@ describe('Widget positive', () => {
     await WidgetPage.clickChangeProfessionButton()
     await WidgetPage.clickTellMoreButton()
     await WidgetPage.clickStayHereButton()
-    expect(textSet.stayHereText1).toBeInTheDocument()
-    expect(textSet.stayHereText2).toBeInTheDocument()
+    expect(screen.getByText(textSet.stayHereText1)).toBeInTheDocument()
+    expect(screen.getByText(textSet.stayHereText2)).toBeInTheDocument()
     WidgetPage.expectStayHereButton()
     WidgetPage.expectReturnToBeginningButton()
   })
@@ -113,8 +112,8 @@ describe('Widget positive', () => {
     await WidgetPage.clickStartConversationButton()
     await WidgetPage.clickTryITButton()
     await WidgetPage.clickInterestingButton()
-    expect(textSet.interestingText1).toBeInTheDocument()
-    expect(textSet.interestingText2).toBeInTheDocument()
+    expect(screen.getByText(textSet.interestingText1)).toBeInTheDocument()
+    expect(screen.getByText(textSet.interestingText2)).toBeInTheDocument()
     WidgetPage.expectStayHereButton()
     WidgetPage.expectBackButton()
   })
@@ -124,7 +123,7 @@ describe('Widget positive', () => {
     await WidgetPage.clickStartConversationButton()
     await WidgetPage.clickTryITButton()
     await WidgetPage.clickAboutChangeOfProfessionButton()
-    expect(textSet.aboutChangeOfProfessionText).toBeInTheDocument()
+    expect(screen.getByText(textSet.aboutChangeOfProfessionText)).toBeInTheDocument()
     WidgetPage.expectTellMoreButton()
     WidgetPage.expectSimplerButton()
     WidgetPage.expectBackButton()
@@ -160,7 +159,7 @@ describe('Widget positive', () => {
 
   test('Check close button of the widget', async () => {
     await WidgetPage.clickOpenWidgetButton()
-    await WidgetPage.clickCloseButton()
+    await WidgetPage.closeWidget()
     await WidgetPage.waitForModalToClose()
     WidgetPage.expectOpenWidgetButton()
   })
@@ -175,8 +174,8 @@ describe('Widget negative', () => {
     await WidgetPage.clickTryITButton()
     await fireEvent.click(screen.getByRole('button', { name: '' }))
     await WidgetPage.clickChangeProfessionButton()
-    await WidgetPage.clickCloseButton()
+    await WidgetPage.closeWidget()
     await WidgetPage.waitForModalToClose()
-    WidgetPage.checkOpenWidgetButton()
+    WidgetPage.expectOpenWidgetButton()
   })
 })

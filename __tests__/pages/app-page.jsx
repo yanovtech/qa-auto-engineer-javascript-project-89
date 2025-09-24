@@ -1,7 +1,7 @@
 import { expect } from 'vitest'
 import { screen, render, fireEvent, waitFor } from '@testing-library/react'
-import App from '../../src/App'
-import { openWidgetButtonText, registrationButtonText, formLabels, modalTitleText, closeButtonLabel } from '../utils/constants'
+import App from '../../src/App.jsx'
+import { openWidgetButtonText, registrationButtonText, formLabels, modalTitleText, closeButtonLabel, tableBackButtonText } from '../utils/constants'
 
 class AppPage {
   static renderApp() {
@@ -24,6 +24,14 @@ class AppPage {
     fireEvent.click(this.registrationButton)
   }
 
+  static get backButton() {
+    return screen.getByText(tableBackButtonText)
+  }
+
+  static clickBackButton() {
+    fireEvent.click(this.backButton)
+  }
+
   static closeWidget() {
     const closeButton
     = screen.getByRole('button', {
@@ -36,6 +44,14 @@ class AppPage {
     return waitFor(() => {
       expect(screen.queryByText(modalTitleText)).not.toBeInTheDocument()
     })
+  }
+
+  static expectRegistrationButton() {
+    expect(this.registrationButton).toBeInTheDocument()
+  }
+
+  static expectOpenWidgetButton() {
+    expect(this.openWidgetButton).toBeInTheDocument()
   }
 
   static expectModalTitle() {
@@ -81,7 +97,7 @@ class AppPage {
     expect(this.getFormInputLabel('address').value).toBe('Тестовый адрес, тестовый номер')
     expect(this.getFormInputLabel('city').value).toBe('Москва')
     expect(this.getFormInputLabel('country').value).toBe('Россия')
-    expect(this.getFotmInputLabel('rules').checked).toBe(true)
+    expect(this.getFormInputLabel('rules').checked).toBe(true)
   }
 
   static expectFormSubmission() {

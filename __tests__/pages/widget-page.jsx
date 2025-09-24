@@ -17,7 +17,9 @@ class WidgetPage {
   }
 
   static get startConversationButton() {
-    return screen.getByText(startConversationButtonText)
+    return screen.getByRole('button', {
+      name: startConversationButtonText,
+    })
   }
 
   static clickStartConversationButton() {
@@ -25,7 +27,9 @@ class WidgetPage {
   }
 
   static get changeProfessionButton() {
-    return screen.getByText(changeProfessionButtonText)
+    return screen.getByRole('button', {
+      name: changeProfessionButtonText,
+    })
   }
 
   static clickChangeProfessionButton() {
@@ -33,7 +37,9 @@ class WidgetPage {
   }
 
   static get tryITButton() {
-    return screen.getByText(tryITButtonText)
+    return screen.getByRole('button', {
+      name: tryITButtonText,
+    })
   }
 
   static clickTryITButton() {
@@ -41,7 +47,9 @@ class WidgetPage {
   }
 
   static get developerButton() {
-    return screen.getByText(developerButtonText)
+    return screen.getByRole('button', {
+      name: developerButtonText,
+    })
   }
 
   static clickDeveloperButton() {
@@ -113,7 +121,9 @@ class WidgetPage {
   }
 
   static get stayHereButton() {
-    return screen.getByText(stayHereButtonText)
+    return screen.getByRole('button', {
+      name: stayHereButtonText,
+    })
   }
 
   static clickStayHereButton() {
@@ -133,7 +143,7 @@ class WidgetPage {
   }
 
   static expectStartConversationButton() {
-    expect(this.startConversationButtton).toBeInTheDocument()
+    expect(this.startConversationButton).toBeInTheDocument()
   }
 
   static expectChangeProfessionButton() {
