@@ -1,7 +1,7 @@
 import { expect } from 'vitest'
 import { screen, render, fireEvent, waitFor } from '@testing-library/react'
 import App from '../../src/App.jsx'
-import { openWidgetButtonText, registrationButtonText, formLabels, modalTitleText, closeButtonLabel, tableBackButtonText } from '../utils/constants'
+import { openWidgetButtonText, registrationButtonText, formLabels, modalTitleText, closeButtonLabel, tableBackButtonText } from '../utils/constants.js'
 
 class AppPage {
   static renderApp() {
@@ -25,7 +25,7 @@ class AppPage {
   }
 
   static get backButton() {
-    return screen.getByText(tableBackButtonText)
+    return (screen.getByText(tableBackButtonText))
   }
 
   static clickBackButton() {
