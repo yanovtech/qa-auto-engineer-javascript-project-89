@@ -25,7 +25,7 @@ class AppPage {
   }
 
   static get backButton() {
-    return (screen.getByText(tableBackButtonText))
+    return screen.getByText(tableBackButtonText)
   }
 
   static clickBackButton() {

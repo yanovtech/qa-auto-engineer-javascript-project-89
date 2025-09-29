@@ -11,11 +11,11 @@ describe('App main section testing', () => {
     AppPage.renderApp()
   })
 
-  test('Check if form renders correctly', () => {
+  test('Check the right render of the form and the existance of the button that executes the process of registartion, the submission of the form', () => {
     AppPage.expectRegistrationButton()
   })
 
-  test('Check process of filling of the form with the data, process of form submission and process of return to main screen after form submission', async () => {
+  test('Check the process of filling of the form with the data, the process of form submission and the process of return to main screen after form submission', async () => {
     await AppPage.fillOutForm()
     AppPage.expectFormValues()
     await AppPage.clickRegistrationButton()
@@ -25,8 +25,8 @@ describe('App main section testing', () => {
   })
 })
 
-describe('App widget section testing', () => {
-  test('Check chat functions', async () => {
+describe('Testing of the widget section of the application', () => {
+  test('Check the functions of the chat', async () => {
     WidgetPage.renderWidget(steps)
     window.HTMLDivElement.prototype.scrollIntoView = vi.fn()
     await WidgetPage.clickOpenWidgetButton()
