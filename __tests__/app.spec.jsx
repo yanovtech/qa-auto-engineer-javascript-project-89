@@ -6,7 +6,7 @@ import WidgetPage from './pages/widget-page.jsx'
 import textSet from '../__fixtures__/text-set.jsx'
 import steps from '../__fixtures__/steps.js'
 
-describe('App main section testing', () => {
+describe('Testing of the main section of the application', () => {
   beforeEach(() => {
     AppPage.renderApp()
   })
