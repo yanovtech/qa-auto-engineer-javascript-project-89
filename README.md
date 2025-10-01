@@ -13,29 +13,49 @@ All files with automatical tests of the widget and application are stored in the
 
 ### How to copy the project to your PC
 To copy this project to your PC, open Ubuntu, type in the command line
-```git clone https://github.com/RedBeduin/qa-auto-engineer-javascript-project-89.git```
+```
+git clone https://github.com/RedBeduin/qa-auto-engineer-javascript-project-89.git
+```
 and rename the repository of the project if you want.
 
 ### How to open the application and the window with registration form and chat bot widget that are tested in the project
 To open the application, open Ubuntu on your PC, move to the directory of the project and type in the command line
-```npm run dev``` - to launch the application,
+```
+npm run dev
+```
+to launch the application,
 then type
-```o``` - to open the window with the registration form and the chat bot widget.
+```
+o
+```
+to open the window with the registration form and the chat bot widget.
 
 ### Interaction with the registration form and chat bot widget
 Then you can fill the registration form and click at checkbox field, send the filled form, type the buttons in the chat bot interface or close the window with the registration form and chat bot widget.
 
 ### Interaction with the application in Ubuntu via command line
 Then you should type in the command line
-```h``` - to see help information
+```
+h
+```
+to see help information
 OR
-```q``` - to exit the application.
+```
+q
+```
+to exit the application.
 
 ### Exploring the test directory and the test files 
 Then you can type in the command line
-```cd __tests__``` - to move to the directory with tests
+```
+cd __tests__
+```
+to move to the directory with tests
 and type
-```ls -a``` - to see the structure of the directory.
+```
+ls -a
+```
+to see the structure of the directory.
 To see the test files it is better to use the code redactor program.
 
 ### Technologies that are used in the project

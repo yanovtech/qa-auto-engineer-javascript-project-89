@@ -11,11 +11,11 @@ describe('Testing of the main section of the application', () => {
     AppPage.renderApp()
   })
 
-  test('Check the right render of the form and the existance of the button that executes the process of registartion, the submission of the form', () => {
+  test('Check the right render of the form and the availability of the form submission button', () => {
     AppPage.expectRegistrationButton()
   })
 
-  test('Check the process of filling of the form with the data, the process of form submission and the process of return to main screen after form submission', async () => {
+  test('Check the data entry into the form', async () => {
     await AppPage.fillOutForm()
     AppPage.expectFormValues()
     await AppPage.clickRegistrationButton()
